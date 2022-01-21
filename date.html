@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PAGE1</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://github.com/klmnankit1511/love/blob/main/anime.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+    }
+    .overlay {
+      z-index: 1;
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      /* margin-top: -100px; */
+    }
+
+    .overlay h2 {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      font-weight: bolder;
+      letter-spacing: 12px;
+      background: linear-gradient(
+        to right,
+        #47484ec7,
+        #276fad,
+        #e24306db,
+        #3e3a7ffa,
+        #3b3952fa
+      );
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    .overlay h1 {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      font-weight: bolder;
+      letter-spacing: 12px;
+    }
+    .title__hi {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .title__hi h3 {
+      display: flex;
+      font-size: 15vh;
+      background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    .title_one,
+    .title_love {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .title_one h2 {
+      position: relative;
+      font-size: 13vh;
+      color: black;
+      -webkit-text-stroke: 0.3vh #383d52;
+    }
+
+    .title_one h2::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      color: #f64f59;
+      -webkit-text-stroke: 0.3vh #383d52;
+      border-right: 2px solid #f64f59;
+      overflow: hidden;
+      animation: sayAnimate 6s linear infinite;
+    }
+    @keyframes sayAnimate {
+      0%,
+      10% {
+        width: 0;
+      }
+      70%,
+      90%,
+      100% {
+        width: 100%;
+      }
+    }
+    .title_love h2 {
+      font-size: 8vh;
+      color: transparent;
+      display: flex;
+    }
+    .title_love h2 span {
+      animation: loveAnimate 6s linear infinite;
+
+      animation-delay: calc(0.3s * var(--i));
+    }
+    @keyframes loveAnimate {
+      0% {
+        color: white;
+        filter: blur(2px) hue-rotate(0deg);
+        text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
+          0 0 80px #00b3ff, 0 0 120px #00b3ff, 0 0 200px #00b3ff,
+          0 0 300px #00b3ff, 0 0 400px #00b3ff;
+      }
+      100% {
+        color: white;
+        filter: blur(2px) hue-rotate(360deg);
+        text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
+          0 0 80px #00b3ff, 0 0 120px #00b3ff, 0 0 200px #00b3ff;
+      }
+    }
+    .title__heart {
+      position: absolute;
+      /* top: 0; */
+      /* left: 0;  */
+      /* margin-top: 100vh; */
+      background-color: white;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* overflow: hidden; */
+    }
+    .heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #e80202;
+      transform: rotate(45deg);
+      box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    .heart::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e80202;
+      border-radius: 50%;
+      box-shadow: 0 -20px 20px rgba(0, 0, 0, 0.1);
+    }
+    .heart::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 100%;
+      height: 100%;
+      background: #e80202;
+      border-radius: 50%;
+      box-shadow: -20px 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .box {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      padding: 100px;
+      background-color: white;
+      color: black;
+    }
+    .box h1 {
+      font-size: 4em;
+    }
+    .box3 {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      margin-top: 150vh;
+      padding: 100px;
+      background-color: white;
+    }
+    .box3 h1 {
+      font-size: 6em;
+    }
+    .title__et,
+    .heart__svg {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      padding: 100px;
+      background-color: white;
+      /* font-size: 8em; */
+      /* color: black; */
+    }
+
+    .title__et,
+    .heart__svg,
+    .title__know {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    .reveal {
+      position: relative;
+      /* font-size: 2.5em; */
+      padding: 0 10px;
+      color: black;
+      font-weight: 500;
+      margin-top: 5px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: 0.5s;
+      transition-delay: 0.5s;
+    }
+    .reveal:nth-child(2) {
+      font-weight: 500;
+      /* font-size: 2.5em; */
+      letter-spacing: 2px;
+      display: inline-block;
+    }
+
+    .reveal.active {
+      transform: scaleX(1);
+      transition-delay: 0s;
+    }
+    img {
+      position: relative;
+      display: block;
+      margin-left: 10px;
+      margin-top: 20px;
+      width: 300px;
+    }
+    .reveal:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: red;
+      transform-origin: right;
+      transition: 0.5s;
+      transition-delay: 0s;
+    }
+    .reveal:nth-child(2):before {
+      background: blue;
+    }
+    .reveal.active:before {
+      transform: scaleX(0);
+      transition-delay: 0.5s;
+    }
+    h2 {
+      font-size: 6em;
+    }
+    .title__know h2 {
+      /* color: white; */
+
+      -webkit-text-stroke: 0.3vh white;
+    }
+
+    .feature {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      background-color: white;
+      flex-direction: column;
+      padding: 0px 50px 50px;
+    }
+    .feature .feature__card {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+
+      /* background-color: red; */
+      /* border: 1px solid lightgrey; */
+      box-shadow: 0 2px 30px rgb(0 0 0 / 20%);
+      border-radius: 5px;
+      /* border-bottom:15px solid #f64f59 ; */
+    }
+    .feature__card1 {
+      margin-top: 45px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .footer__name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+    }
+    .footer__name h2 {
+      font-size: 15vh;
+      background: linear-gradient(to right, #cc95c0, #dbd4b4, #7aa1d2);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    .footer__name h4 span {
+      color: burlywood;
+    }
+  </style>
+  <body>
+    <div class="overlay">
+      <h1>To My</h1>
+      <h1 style="top: 45%">BEAUTIFUL</h1>
+      <h2>LOVE❤️</h2>
+    </div>
+    <canvas id="canvas" width="1000" height="500"></canvas>
+    <div class="title__hi">
+      <h3 data-aos="fade-up" data-aos-duration="3000">HI SWEETY CUTIE</h3>
+    </div>
+    <div class="title_one">
+      <h2 data-text="I Just want to Say">
+        I Just want to Say
+        <span style="color: black; opacity: 1; -webkit-text-stroke: 0.3vh black"
+          >a</span
+        >
+      </h2>
+    </div>
+    <div class="title_love">
+      <h2>
+        <span style="--i: 1">I</span>
+        <span style="--i: 2; margin-left: 10px">L</span>
+        <span style="--i: 3">O</span>
+        <span style="--i: 4">V</span>
+        <span style="--i: 5">E</span>
+        <span style="--i: 6; margin-left: 10px">Y</span>
+        <span style="--i: 7">O</span>
+        <span style="--i: 8">U</span>
+        <span style="--i: 9; margin-left: 10px">T</span>
+        <span style="--i: 10">O</span>
+        <span style="--i: 11">O</span>
+        <span style="--i: 12; margin-left: 10px">M</span>
+        <span style="--i: 13">U</span>
+        <span style="--i: 14">C</span>
+        <span style="--i: 15">H</span>
+      </h2>
+    </div>
+
+    <div>
+      <div class="box">
+        <h1 class="text1" style="">Do you know how much I love you</h1>
+        <h1 class="text2" style="">Socho Socho Socho na</h1>
+        <h1 class="text3" style="">Hum Baata ye Kitna</h1>
+        <h1 class="text4" style="">Jitna Sara dil hai utna,Count karna</h1>
+      </div>
+    </div>
+    <div class="title__heart">
+      <div class="container">
+        <div class="heart"></div>
+      </div>
+    </div>
+
+    <div class="box3">
+      <h1 class="text9" style="color: black">
+        Count Ki nhi na
+      </h1>
+      <h1 class="text10" style="color: black">
+        Jitna dil hai na uska Power double kar do utna
+      </h1>
+    </div>
+    <div class="title__et">
+      <h2 class="reveal">And Every Time When</h2>
+      <h2 class="reveal">I See you</h2>
+      <h2 class="reveal">My heart become</h2>
+    </div>
+    <div class="heart__svg">
+      <div data-aos="fade-left" style="margin-left: 50px; font-size: 50px">
+        <svg width="400" height="400" viewBox="0 0 200 200">
+          <g transform="translate(100 100)">
+            <path
+              transform="translate(-50 -50)"
+              fill="tomato"
+              d="M92.71,7.27L92.71,7.27c-9.71-9.69-25.46-9.69-35.18,0L50,14.79l-7.54-7.52C32.75-2.42,17-2.42,7.29,7.27v0 c-9.71,9.69-9.71,25.41,0,35.1L50,85l42.71-42.63C102.43,32.68,102.43,16.96,92.71,7.27z"
+            ></path>
+            <animateTransform
+              attributeName="transform"
+              type="scale"
+              values="1; 1.5; 1.25; 1.5; 1.5; 1;"
+              dur="1s"
+              repeatCount="indefinite"
+              additive="sum"
+            ></animateTransform>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="title__know">
+      <h2 data-text="Do you know" class="reveal">Do you know</h2>
+      <h2 data-text="You are" data-aos="zoom-in-up" data-aos-duration="4000">
+        You are
+      </h2>
+    </div>
+    <div class="feature">
+      <div class="feature__card1">
+        <div
+          data-aos="fade-down-right"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Beautiful
+        </div>
+        <div
+          data-aos="fade-down"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Gorgeous
+        </div>
+        <div
+          data-aos="fade-down"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Sweet
+        </div>
+        <div
+          data-aos="fade-down-left"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Incredible
+        </div>
+      </div>
+      <div class="feature__card1">
+        <div
+          data-aos="fade-right"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Intelligent
+        </div>
+        <div
+          data-aos="zoom-in-up"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Wonderful
+        </div>
+        <div
+          data-aos="zoom-in-up"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Amazing
+        </div>
+        <div
+          data-aos="fade-left"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Pretty
+        </div>
+      </div>
+      <div class="feature__card1">
+        <div
+          data-aos="fade-up-right"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Pleasant
+        </div>
+        <div data-aos="fade-up" data-aos-duration="6000" class="feature__card">
+          Cute
+        </div>
+        <div data-aos="fade-up" data-aos-duration="6000" class="feature__card">
+          Prepossessing
+        </div>
+        <div
+          data-aos="fade-up-left"
+          data-aos-duration="6000"
+          class="feature__card"
+        >
+          Killer Eyes
+        </div>
+      </div>
+    </div>
+    <div class="footer__name">
+      <h2>SEMANK</h2>
+      <h4><span>Ankit</span> ❤️ <span>Seema</span></h4>
+    </div>
+
+    <!-- <script src="https://github.com/klmnankit1511/love/blob/main/anime.min.js"></script> -->
+    <script src="./anime.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/ScrollTrigger.min.js"></script>
+    <script src="aos.js"></script>
+    <script>
+      const reveal = gsap.utils.toArray(".reveal");
+      reveal.forEach((text, i) => {
+        ScrollTrigger.create({
+          trigger: text,
+          toggleClass: "active",
+          start: "top 90%",
+          end: "top 20%",
+          // markers:true
+        });
+      });
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".box",
+            start: "center center",
+            end: "bottom top",
+            // markers:true,
+            scrub: true,
+            pin: true,
+          },
+        })
+        .from(".text1", { x: innerWidth * 1 })
+        .from(".text2", { x: innerWidth * -1 })
+        .from(".text3", { x: innerWidth * 1 })
+        .from(".text4", { x: innerWidth * 1 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".box3",
+            start: "center center",
+            end: "bottom top",
+            // markers:true,
+            scrub: true,
+            pin: true,
+          },
+        })
+        .from(".text9", { y: innerHeight * 1 })
+        .from(".text10", { y: innerHeight * 1 })
+        .from(".text11", { y: innerHeight * 1 });
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".box4",
+          start: "center center",
+          end: "bottom top",
+          // markers:true,
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      TweenMax.to(".overlay h1", 3, {
+        opacity: 0,
+        y: -60,
+        ease: Expo.easeInOut,
+      });
+      TweenMax.to(".overlay h2", 4, {
+        opacity: 0,
+        y: -30,
+        ease: Expo.easeInOut,
+      });
+
+      TweenMax.to(".overlay", 2, {
+        delay: 1,
+        top: "-100%",
+        ease: Expo.easeInOut,
+      });
+      var canvas = document.getElementById("canvas");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Initialize the GL context
+      var gl = canvas.getContext("webgl");
+      if (!gl) {
+        console.error("Unable to initialize WebGL.");
+      }
+
+      //Time
+      var time = 0.0;
+
+      //************** Shader sources **************
+
+      var vertexSource = `
+attribute vec2 position;
+void main() {
+	gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+      var fragmentSource = `
+precision highp float;
+uniform float width;
+uniform float height;
+vec2 resolution = vec2(width, height);
+uniform float time;
+#define POINT_COUNT 8
+vec2 points[POINT_COUNT];
+const float speed = -0.5;
+const float len = 0.25;
+float intensity = 1.3;
+float radius = 0.008;
+//https://www.shadertoy.com/view/MlKcDD
+//Signed distance to a quadratic bezier
+float sdBezier(vec2 pos, vec2 A, vec2 B, vec2 C){    
+	vec2 a = B - A;
+	vec2 b = A - 2.0*B + C;
+	vec2 c = a * 2.0;
+	vec2 d = A - pos;
+	float kk = 1.0 / dot(b,b);
+	float kx = kk * dot(a,b);
+	float ky = kk * (2.0*dot(a,a)+dot(d,b)) / 3.0;
+	float kz = kk * dot(d,a);      
+	float res = 0.0;
+	float p = ky - kx*kx;
+	float p3 = p*p*p;
+	float q = kx*(2.0*kx*kx - 3.0*ky) + kz;
+	float h = q*q + 4.0*p3;
+	if(h >= 0.0){ 
+		h = sqrt(h);
+		vec2 x = (vec2(h, -h) - q) / 2.0;
+		vec2 uv = sign(x)*pow(abs(x), vec2(1.0/3.0));
+		float t = uv.x + uv.y - kx;
+		t = clamp( t, 0.0, 1.0 );
+		// 1 root
+		vec2 qos = d + (c + b*t)*t;
+		res = length(qos);
+	}else{
+		float z = sqrt(-p);
+		float v = acos( q/(p*z*2.0) ) / 3.0;
+		float m = cos(v);
+		float n = sin(v)*1.732050808;
+		vec3 t = vec3(m + m, -n - m, n - m) * z - kx;
+		t = clamp( t, 0.0, 1.0 );
+		// 3 roots
+		vec2 qos = d + (c + b*t.x)*t.x;
+		float dis = dot(qos,qos);
+        
+		res = dis;
+		qos = d + (c + b*t.y)*t.y;
+		dis = dot(qos,qos);
+		res = min(res,dis);
+		
+		qos = d + (c + b*t.z)*t.z;
+		dis = dot(qos,qos);
+		res = min(res,dis);
+		res = sqrt( res );
+	}
+    
+	return res;
+}
+//http://mathworld.wolfram.com/HeartCurve.html
+vec2 getHeartPosition(float t){
+	return vec2(16.0 * sin(t) * sin(t) * sin(t),
+							-(13.0 * cos(t) - 5.0 * cos(2.0*t)
+							- 2.0 * cos(3.0*t) - cos(4.0*t)));
+}
+//https://www.shadertoy.com/view/3s3GDn
+float getGlow(float dist, float radius, float intensity){
+	return pow(radius/dist, intensity);
+}
+float getSegment(float t, vec2 pos, float offset, float scale){
+	for(int i = 0; i < POINT_COUNT; i++){
+		points[i] = getHeartPosition(offset + float(i)*len + fract(speed * t) * 6.28);
+	}
+    
+	vec2 c = (points[0] + points[1]) / 2.0;
+	vec2 c_prev;
+	float dist = 10000.0;
+    
+	for(int i = 0; i < POINT_COUNT-1; i++){
+		//https://tinyurl.com/y2htbwkm
+		c_prev = c;
+		c = (points[i] + points[i+1]) / 2.0;
+		dist = min(dist, sdBezier(pos, scale * c_prev, scale * points[i], scale * c));
+	}
+	return max(0.0, dist);
+}
+void main(){
+	vec2 uv = gl_FragCoord.xy/resolution.xy;
+	float widthHeightRatio = resolution.x/resolution.y;
+	vec2 centre = vec2(0.5, 0.5);
+	vec2 pos = centre - uv;
+	pos.y /= widthHeightRatio;
+	//Shift upwards to centre heart
+	pos.y += 0.02;
+	float scale = 0.000015 * height;
+	
+	float t = time;
+    
+	//Get first segment
+  float dist = getSegment(t, pos, 0.0, scale);
+  float glow = getGlow(dist, radius, intensity);
+  
+  vec3 col = vec3(0.0);
+	//White core
+  col += 10.0*vec3(smoothstep(0.003, 0.001, dist));
+  //Pink glow
+  col += glow * vec3(1.0,0.05,0.3);
+  
+  //Get second segment
+  dist = getSegment(t, pos, 3.4, scale);
+  glow = getGlow(dist, radius, intensity);
+  
+  //White core
+  col += 10.0*vec3(smoothstep(0.003, 0.001, dist));
+  //Blue glow
+  col += glow * vec3(0.1,0.4,1.0);
+        
+	//Tone mapping
+	col = 1.0 - exp(-col);
+	//Gamma
+	col = pow(col, vec3(0.4545));
+	//Output to screen
+ 	gl_FragColor = vec4(col,2.0);
+}
+`;
+
+      //************** Utility functions **************
+
+      window.addEventListener("resize", onWindowResize, false);
+
+      function onWindowResize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform1f(widthHandle, window.innerWidth);
+        gl.uniform1f(heightHandle, window.innerHeight);
+      }
+
+      //Compile shader and combine with source
+      function compileShader(shaderSource, shaderType) {
+        var shader = gl.createShader(shaderType);
+        gl.shaderSource(shader, shaderSource);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          throw "Shader compile failed with: " + gl.getShaderInfoLog(shader);
+        }
+        return shader;
+      }
+
+      //From https://codepen.io/jlfwong/pen/GqmroZ
+      //Utility to complain loudly if we fail to find the attribute/uniform
+      function getAttribLocation(program, name) {
+        var attributeLocation = gl.getAttribLocation(program, name);
+        if (attributeLocation === -1) {
+          throw "Cannot find attribute " + name + ".";
+        }
+        return attributeLocation;
+      }
+
+      function getUniformLocation(program, name) {
+        var attributeLocation = gl.getUniformLocation(program, name);
+        if (attributeLocation === -1) {
+          throw "Cannot find uniform " + name + ".";
+        }
+        return attributeLocation;
+      }
+
+      //************** Create shaders **************
+
+      //Create vertex and fragment shaders
+      var vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER);
+      var fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
+
+      //Create shader programs
+      var program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+
+      gl.useProgram(program);
+
+      //Set up rectangle covering entire canvas
+      var vertexData = new Float32Array([
+        -1.0,
+        1.0, // top left
+        -1.0,
+        -1.0, // bottom left
+        1.0,
+        1.0, // top right
+        1.0,
+        -1.0, // bottom right
+      ]);
+
+      //Create vertex buffer
+      var vertexDataBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
+
+      // Layout of our data in the vertex buffer
+      var positionHandle = getAttribLocation(program, "position");
+
+      gl.enableVertexAttribArray(positionHandle);
+      gl.vertexAttribPointer(
+        positionHandle,
+        2, // position is a vec2 (2 values per component)
+        gl.FLOAT, // each component is a float
+        false, // don't normalize values
+        2 * 4, // two 4 byte float components per vertex (32 bit float is 4 bytes)
+        0 // how many bytes inside the buffer to start from
+      );
+
+      //Set uniform handle
+      var timeHandle = getUniformLocation(program, "time");
+      var widthHandle = getUniformLocation(program, "width");
+      var heightHandle = getUniformLocation(program, "height");
+
+      gl.uniform1f(widthHandle, window.innerWidth);
+      gl.uniform1f(heightHandle, window.innerHeight);
+
+      var lastFrame = Date.now();
+      var thisFrame;
+
+      function draw() {
+        //Update time
+        thisFrame = Date.now();
+        time += (thisFrame - lastFrame) / 1000;
+        lastFrame = thisFrame;
+
+        //Send uniforms to program
+        gl.uniform1f(timeHandle, time);
+        //Draw a triangle strip connecting vertices 0-4
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+      AOS.init();
+      const container = document.querySelector(".title__heart");
+      for (var i = 1; i <= 100; i++) {
+        const hearts = document.createElement("div");
+        hearts.classList.add("heart");
+        container.appendChild(hearts);
+      }
+      function animateHearts() {
+        anime({
+          targets: ".heart",
+          translateX: function () {
+            return anime.random(-700, 700);
+          },
+          translateY: function () {
+            return anime.random(-500, 500);
+          },
+          rotate: 45,
+          scale: function () {
+            return anime.random(1, 5);
+          },
+          easing: "easeInOutBack",
+          duration: 3000,
+          delay: anime.stagger(10),
+          complete: animateHearts,
+        });
+      }
+      animateHearts();
+    </script>
+  </body>
+</html>
